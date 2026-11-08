@@ -1,0 +1,323 @@
+/* Color variables using explicit human-readable color names */
+$color-primary: darkslategray;
+$color-accent: dodgerblue;
+$color-background: whitesmoke;
+$color-card-bg: white;
+$color-text: darkslategray;
+$color-muted: gray;
+$color-error: crimson;
+$color-white: white;
+
+$transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+/* Global selection and typography styling requirements (::selection & ::first-letter) */
+::selection {
+    background-color: $color-accent;
+    color: $color-white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: $color-background;
+    color: $color-text;
+    line-height: 1.6;
+
+    &::first-letter {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: $color-accent;
+    }
+}
+
+/* Navigation menu with pseudo-classes (:hover, :focus, :active) and ::after decoration */
+.header {
+    background-color: $color-primary;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    .navbar {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            color: $color-white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+
+            li {
+                a {
+                    color: $color-white;
+                    text-decoration: none;
+                    font-weight: 500;
+                    position: relative;
+                    padding-bottom: 5px;
+                    transition: $transition-smooth;
+
+                    /* Decorative underline via ::after without extra HTML elements */
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        background-color: $color-accent;
+                        transition: width 0.3s ease;
+                    }
+
+                    &:hover {
+                        color: $color-accent;
+                        &::after {
+                            width: 100%;
+                        }
+                    }
+
+                    &:focus {
+                        outline: 2px dashed $color-accent;
+                        outline-offset: 4px;
+                    }
+
+                    &:active {
+                        color: $color-error;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, darkslategray, teal);
+    color: $color-white;
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+}
+
+/* Students Section & Cards */
+.students-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 2rem;
+        color: $color-primary;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+
+        .card {
+            background-color: $color-card-bg;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transition: $transition-smooth;
+            position: relative;
+
+            /* Decorative top border via ::before without extra HTML elements */
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(90deg, dodgerblue, mediumseagreen);
+                z-index: 2;
+            }
+
+            /* Card hover animation effects */
+            &:hover {
+                transform: translateY(-10px) scale(1.02);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+
+                .card-img-wrapper img {
+                    transform: scale(1.1);
+                }
+            }
+
+            .card-img-wrapper {
+                width: 100%;
+                height: 200px;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                }
+            }
+
+            .card-content {
+                padding: 1.5rem;
+
+                h3 {
+                    font-size: 1.3rem;
+                    margin-bottom: 0.5rem;
+                    color: $color-primary;
+                }
+
+                .role {
+                    font-size: 0.9rem;
+                    color: $color-accent;
+                    font-weight: 600;
+                    margin-bottom: 0.8rem;
+                }
+
+                .desc {
+                    font-size: 0.95rem;
+                    color: $color-muted;
+                }
+            }
+        }
+    }
+}
+
+/* Registration Form with pseudo-classes and pseudo-elements */
+.register-section {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    background-color: $color-card-bg;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+
+    h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: $color-primary;
+    }
+
+    .reg-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            label {
+                font-weight: 600;
+                font-size: 0.95rem;
+                color: $color-primary;
+            }
+
+            input {
+                padding: 0.8rem 1rem;
+                border: 1px solid silver;
+                border-radius: 6px;
+                font-size: 1rem;
+                transition: $transition-smooth;
+
+                /* ::placeholder styling */
+                &::placeholder {
+                    color: lightslategray;
+                    font-style: italic;
+                }
+
+                /* :focus state */
+                &:focus {
+                    border-color: $color-accent;
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
+                }
+            }
+        }
+
+        /* :nth-child() pseudo-class usage inside the form */
+        .form-group:nth-child(2) input {
+            background-color: ghostwhite;
+        }
+
+        /* :not() pseudo-class demonstration for the submit button */
+        button:not([type="button"]) {
+            padding: 0.9rem;
+            background-color: $color-accent;
+            color: $color-white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: $transition-smooth;
+            margin-top: 1rem;
+
+            &:hover {
+                background-color: deepskyblue;
+                transform: translateY(-2px);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+}
+
+/* Footer */
+.footer {
+    background-color: $color-primary;
+    color: $color-white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+}
+
+/* Responsive layout adjustments via media queries */
+@media (max-width: 768px) {
+    .header .navbar {
+        flex-direction: column;
+        gap: 1rem;
+
+        .nav-links {
+            gap: 1rem;
+        }
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
